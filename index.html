@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>나만의 중고마켓</title>
+    <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/easygpt/default.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <style>
+        /* 카드 전체에 양쪽 100px 여백 적용 */
+        .card {
+            padding: 0 100px;
+            transition: transform 0.3s ease; /* 확대 효과를 위한 트랜지션 */
+        }
+
+        /* 카드에 마우스 올렸을 때 확대 효과 */
+        .card:hover {
+            transform: scale(1.05); /* 카드 확대 비율 설정 */
+        }
+
+        /* 이미지 크기와 배율 조정 */
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero bg-dark text-center py-5">
+        <h1 class="text-white">나만의 당근마켓</h1>
+        <h2 class="text-white">집에 있는 물건을 팝니다!</h2>
+    </div>
+    
+    <!-- 중고 물품 카드 리스트 -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- 카드 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="냄비.jpg" class="card-img-top" alt="냄비 이미지">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://www.naver.com" target="_blank">냄비</a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">5만원</h6>
+                        <p class="card-text">한 번 밖에 안쓴 냄비 팝니다. 부모님이 독립할 때 주신 거예요!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 카드 2 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="자전거.jpg" class="card-img-top" alt="자전거 이미지">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://www.naver.com" target="_blank">자전거</a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">10만원</h6>
+                        <p class="card-text">몇 번 타지 않은 거의 새 자전거입니다. 잘 굴러가요!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 카드 3 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="책.JPG" class="card-img-top" alt="책 이미지">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="https://www.naver.com" target="_blank">책</a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">1만원</h6>
+                        <p class="card-text">생명과학 전공서적입니다. 얼마 안 써서 깨끗하고 상태 좋아요. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

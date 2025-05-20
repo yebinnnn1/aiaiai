@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>고교학점제 수학 과목 소개 및 추천</title>
+    <style>
+        body {
+            font-family: "Nanum Gothic", sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .subject {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        .subject h2 {
+            margin-top: 0;
+            color: #34495e;
+        }
+        .subject ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        .career-section {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        select, button {
+            margin-top: 10px;
+            padding: 7px;
+            font-size: 16px;
+        }
+        .recommendations {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎓 고교학점제 수학 과목 소개 및 추천 웹페이지</h1>
+
+    <div id="subjects-container"></div>
+
+    <div class="career-section">
+        <label for="career-select"><strong>진로 계열을 선택하세요:</strong></label><br />
+        <select id="career-select">
+            <option value="">--선택--</option>
+        </select>
+
+        <div id="recommendations" class="recommendations"></div>
+    </div>
+
+    <script>
+        // 과목 데이터
+        const subjectData = {
+            "미적분 II": {
+                "학년/유형": "3학년, 일반 선택",
+                "설명": "대학 수준의 기초 미적분학으로, 과학·공학·경제 등 다양한 분야의 기초가 되는 수학",
+                "주요 내용": ["함수의 극한과 연속", "도함수의 개념과 활용", "부정적분과 정적분"],
+                "추천 진로": "이공계열, 의학·보건, 경제·경영"
+            },
+            "수학과제탐구": {
+                "학년/유형": "2학년, 융합 과목",
+                "설명": "프로젝트형 수학 활동 중심 과목으로, 문제 해결력과 탐구 역량을 기름",
+                "주요 내용": ["주제 선정 및 계획 수립", "이론 조사 및 분석", "결과 발표 및 피드백"],
+                "추천 진로": "전 계열"
+            },
+            "실용통계": {
+                "학년/유형": "3학년, 진로 선택",
+                "설명": "실생활에 필요한 통계 분석 역량을 키우는 과목",
+                "주요 내용": ["기초 통계량", "확률과 기대값", "실제 사례 적용"],
+                "추천 진로": "사회과학, 경제·경영, 데이터 분야"
+            },
+            "수학과 문화": {
+                "학년/유형": "3학년, 융합 과목",
+                "설명": "수학과 예술, 역사, 철학을 연결하는 교양 중심 과목",
+                "주요 내용": ["수학자의 생애", "예술 속 수학", "퍼즐과 게임"],
+                "추천 진로": "인문·사회·예술계열"
+            },
+            "기하": {
+                "학년/유형": "2학년, 진로 선택",
+                "설명": "도형을 중심으로 공간 감각과 논리 사고를 기르는 과목",
+                "주요 내용": ["도형의 성질", "작도 및 증명", "공간 표현과 벡터"],
+                "추천 진로": "공학, 디자인, 그래픽 관련"
+            }
+        };
+
+        // 진로별 추천 과목
+        const careerMap = {
+            "이공계열": [
+                ["미적분 II", "대학 공학·과학 수업의 기초"],
+                ["기하", "공간 감각과 논리적 사고 강화"],
+                ["수학과제탐구", "탐구 역량 강화"]
+            ],
+            "의학·보건계열": [
+                ["미적분 II", "의학 계산과 데이터 해석 기초"],
+                ["실용통계", "임상 데이터 분석 능력"],
+                ["수학과제탐구", "융합적 사고 발달"]
+            ],
+            "경영·경제계열": [
+                ["실용통계", "시장 분석 능력 강화"],
+                ["미적분 II", "경제학적 함수 이해"],
+                ["수학과제탐구", "논리적 사고력 강화"]
+            ],
+            "사회과학계열": [
+                ["실용통계", "사회현상 분석에 필요한 통계 이해"],
+                ["수학과제탐구", "정량적 접근 가능"],
+                ["수학과 문화", "수학적 교양 향상"]
+            ],
+            "예체능계열": [
+                ["수학과 문화", "예술 속 수학 개념 이해"],
+                ["기하", "공간 시각화 역량 강화"]
+            ],
+            "인문계열": [
+                ["수학과 문화", "인문적 사고와 수학적 연결"],
+                ["수학과제탐구", "창의적 표현 능력 강화"]
+            ],
+            "컴퓨터·AI계열": [
+                ["미적분 II", "계산적 사고 기반"],
+                ["기하", "그래픽·시뮬레이션 기초"],
+                ["실용통계", "데이터 분석 능력"],
+                ["수학과제탐구", "문제 해결 경험"]
+            ]
+        };
+
+        // 과목 소개 HTML 생성
+        const subjectsContainer = document.getElementById('subjects-container');
+        for (const [name, data] of Object.entries(subjectData)) {
+            const div = document.createElement('div');
+            div.classList.add('subject');
+
+            let content = `<h2>📗 ${name}</h2>`;
+            content += `<p><strong>유형:</strong> ${data["학년/유형"]}</p>`;
+            content += `<p><strong>설명:</strong> ${data["설명"]}</p>`;
+            content += `<p><strong>주요 내용:</strong></p><ul>`;
+            data["주요 내용"].forEach(item => {
+                content += `<li>${item}</li>`;
+            });
+            content += `</ul>`;
+            content += `<p><strong>추천 진로:</strong> ${data["추천 진로"]}</p>`;
+
+            div.innerHTML = content;
+            subjectsContainer.appendChild(div);
+        }
+
+        // 진로 선택 드롭다운 채우기
+        const careerSelect = document.getElementById('career-select');
+        for (const career of Object.keys(careerMap)) {
+            const option = document.createElement('option');
+            option.value = career;
+            option.textContent = career;
+            careerSelect.appendChild(option);
+        }
+
+        // 추천 과목 표시 함수
+        const recommendationsDiv = document.getElementById('recommendations');
+        careerSelect.addEventListener('change', () => {
+            const selectedCareer = careerSelect.value;
+            recommendationsDiv.innerHTML = '';
+
+            if (selectedCareer && careerMap[selectedCareer]) {
+                let recHTML = `<h3>✅ ${selectedCareer} 추천 과목</h3><ul>`;
+                careerMap[selectedCareer].forEach(([subject, effect]) => {
+                    recHTML += `<li><strong>${subject}</strong>: ${effect}</li>`;
+                });
+                recHTML += `</ul>`;
+                recommendationsDiv.innerHTML = recHTML;
+            }
+        });
+    </script>
+</body>
+</html>
